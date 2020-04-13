@@ -1,0 +1,19 @@
+<ion-header>
+<ion-segment [(ngModel)]="Select" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="waiting" >
+      <ion-label >Waiting</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="succeed">
+      <ion-label>Succeed</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+  <ion-content>
+  <div [ngSwitch]="Select" > 
+ <app-waiting  *ngSwitchCase="'waiting'" ></app-waiting>
+
+<app-succeed *ngSwitchCase="'succeed'"> </app-succeed>
+
+</div>
+
+

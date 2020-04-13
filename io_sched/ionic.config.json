@@ -1,0 +1,7 @@
+{
+  "name": "io_sched",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

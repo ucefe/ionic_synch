@@ -1,0 +1,35 @@
+<ion-card *ngFor="let schedule of schedules">
+    <ion-item-sliding>
+
+  <ion-item >
+
+    <ion-avatar slot="start" >
+        <ion-icon *ngIf="schedule.type=='Call'" name="call" color="primary" ></ion-icon>
+        <ion-icon *ngIf="schedule.type=='Sms'" name="chatbox" color="primary"></ion-icon>
+    </ion-avatar>
+   
+      <ion-label>
+      <h2>{{schedule.name}} | {{schedule.contact}}</h2>
+      <p>{{schedule.date}}       <ion-icon name="time-outline" slot="end" color="danger"> </ion-icon>
+      </p>
+       </ion-label>
+      </ion-item>
+
+
+
+  <ion-item-options side="end"> 
+    <ion-item-option (click)="update(schedule)">  <ion-icon name="create-outline"></ion-icon>  </ion-item-option>
+    <ion-item-option (click)="delete(schedule)"> <ion-icon name="trash-outline"></ion-icon>  </ion-item-option>
+  </ion-item-options>
+
+</ion-item-sliding> 
+</ion-card>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+

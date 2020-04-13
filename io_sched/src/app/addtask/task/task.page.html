@@ -1,0 +1,71 @@
+<ion-header>
+    
+      <ion-toolbar>
+          <ion-buttons slot="start" >
+            <ion-back-button defaultHref="home" color="primary"></ion-back-button>
+          </ion-buttons>
+ <ion-title color="primary"> {{title}} </ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="primary" (click)="myfct()">
+            Done
+          </ion-button>
+        </ion-buttons>
+</ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+
+        <ion-list>
+
+    <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input  [(ngModel)] ="sch.name" placeholder=""></ion-input>
+      </ion-item>
+
+      <ion-item id="message">
+          <ion-label position="floating">Message</ion-label>
+          <ion-input [(ngModel)]="sch.message"></ion-input>
+        </ion-item>
+    
+    
+<!--     
+        <ion-item>
+            <ion-label>Contact</ion-label>
+            <ionic-selectable 
+                [(ngModel)]="sch.contact"
+                [items]="cs"
+                itemTextField="cs.length"
+                (onChange)="portChange($event)">
+            </ionic-selectable>
+        </ion-item> -->
+
+
+      <ion-item>
+        <ion-label>Contact</ion-label>
+
+        <ion-select  (click)="loadcontact('')" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select Contact"  [(ngModel)]="sch.contact" >
+              <ion-select-option  *ngFor="let c of mycontacts" value="{{c.name.givenName}}"><h1>{{c.name.givenName}} | {{c.phoneNumbers[0].value}} </h1></ion-select-option>
+
+          
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime displayFormat="DDDD MMM D" value=" "  [(ngModel)]="sch.date"></ion-datetime>
+        </ion-item>
+
+      <ion-item>
+          <ion-label>Time</ion-label>
+          <ion-datetime displayFormat="hh:mm A" placeholder="00:00 PM" value="hh:mm" [(ngModel)]="sch.date" begin="getDate()"></ion-datetime>
+      </ion-item>
+      <ion-item >
+          <ion-label>Notify Me</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="sch.selected"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
