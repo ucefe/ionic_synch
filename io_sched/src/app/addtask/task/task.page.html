@@ -34,7 +34,7 @@
         <ion-label>Contact</ion-label>
 
         <ion-select  (click)="loadcontact('')" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select Contact"  [(ngModel)]="sch.contact" >
-              <ion-select-option  *ngFor="let c of mycontacts" value="{{c.name.givenName}}"><h1>{{c.name.givenName}} | {{c.phoneNumbers[0].value}} </h1></ion-select-option>
+              <ion-select-option  *ngFor="let c of mycontacts" value="{{c.phoneNumbers[0].value}}"><h1>{{c.name.givenName}} | {{c.phoneNumbers[0].value}} </h1></ion-select-option>
 
           
         </ion-select>

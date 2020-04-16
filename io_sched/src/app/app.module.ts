@@ -13,6 +13,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule } from '@angular/forms';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { TaskPageModule } from './addtask/task/task.module';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +26,7 @@ import { TaskPageModule } from './addtask/task/task.module';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Contacts
+    Contacts,LocalNotifications,CallNumber
   ],
   bootstrap: [AppComponent]
 })

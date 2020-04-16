@@ -6,6 +6,10 @@ import { StorageService } from 'src/app/services/storage.service';
 import { Contacts, Contact, ContactField, ContactName, IContactFindOptions, ContactFieldType } from '@ionic-native/contacts/ngx';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { scheduled } from 'rxjs';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Platform } from '@ionic/angular';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
 
 @Component({
   selector: 'app-task',
@@ -22,19 +26,36 @@ TIME: Date ;
  
 
   constructor(
+    private LocalNotifications : LocalNotifications,
     private activateRoute:ActivatedRoute, 
     private router :Router,
     private service: StorageService,
     private contacts: Contacts,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private plt :Platform,
+    private callNumber : CallNumber,
+    private _db: StorageService
      ) {   
 // this.sch.id=48397439;  
   // this.loadcontact('');
-  this.route.queryParams.subscribe(params => {
-    if (this.router.getCurrentNavigation().extras.state) {
-      this.sch = this.router.getCurrentNavigation().extras.state.s;
-    }
-  });
+  // this.route.queryParams.subscribe(params => {
+  //   if (this.router.getCurrentNavigation().extras.state) {
+  //     this.sch = this.router.getCurrentNavigation().extras.state.s;
+  //   }
+  // });
+  
+
+  this.plt.ready().then(()=>{
+    this.LocalNotifications.on('trigger').subscribe(res =>{
+      this._db.showMessageOkCancel(res.data.type,res.data.msg );
+
+      if( res.data.type==="Call"){
+       this.callNumber.callNumber(res.data.contact,true)
+       .then(res => console.log('Launched dialer!', res))
+       .catch(err => console.log('Error launching dialer', err));}
+    })
+ });
+
      }
 
      
@@ -77,7 +98,14 @@ a(){
         this.sch.time=this.converTime(this.TIME);
         this.sch.waiting=true;
       this.service.addschedule(this.sch).then(()=>{
-     
+       
+       
+        this.LocalNotifications.schedule({
+          id:this.sch.id,
+          data: {type:this.sch.type,contact:this.sch.contact,msg:this.sch.message },
+          trigger: {at: new Date(this.TIME) }
+        });
+        
         return this.router.navigate(['']);
      
       }) ;  
