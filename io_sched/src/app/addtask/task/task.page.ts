@@ -18,7 +18,7 @@ export class TaskPage implements OnInit {
   sch:Schedule= <Schedule>{};
 
  mycontacts : Contact []=[];
-
+TIME: Date ;
  
 
   constructor(
@@ -37,6 +37,29 @@ export class TaskPage implements OnInit {
   });
      }
 
+     
+a(){
+  console.log(this.TIME);
+}
+     Dateformat(x){
+       console.log(x);
+     }
+
+     converTime(t){
+       let v = new Date(t);
+      //  this.sch.time[] =v.getSeconds();
+      // //  this.sch.time.push(v.getHours());
+
+      let s={
+        h : v.getHours(),
+        m: v.getMinutes()}
+    return s;
+    }
+
+     
+
+
+
 
  loadcontact(q) {
   this.contacts.find(['*'] , {filter :q ,multiple:true, hasPhoneNumber:true})
@@ -51,6 +74,7 @@ export class TaskPage implements OnInit {
          if((this.sch.date!==undefined) && (this.sch.contact!=="" )) {
         this.sch.id=Date.now();
         this.sch.type=this.title;
+        this.sch.time=this.converTime(this.TIME);
         this.sch.waiting=true;
       this.service.addschedule(this.sch).then(()=>{
      
@@ -68,15 +92,7 @@ else
  
      }
 
-   
-    //   portChange(event: {
-    //     component: IonicSelectableComponent,
-    //     value: any 
-    // }) {
-    //   this.loadcontact(event.value) ;   }
-      // onKeyUp(ev){
-      //   this.loadcontact(ev.target.value);
-      // }
+
 
   ngOnInit() { 
 

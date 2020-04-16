@@ -10,8 +10,7 @@
    
       <ion-label>
       <h2>{{schedule.name}} | {{schedule.contact}}</h2>
-      <p>{{schedule.date}}       <ion-icon name="time-outline" slot="end" color="danger"> </ion-icon>
-      </p>
+      <p slot="end">{{schedule.time.h}}:{{schedule.time.m}}<ion-icon name="time-outline"  color="danger"></ion-icon></p>
        </ion-label>
       </ion-item>
 

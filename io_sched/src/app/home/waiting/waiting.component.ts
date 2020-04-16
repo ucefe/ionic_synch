@@ -42,10 +42,7 @@ if(this.page===this.maxpage){
  
 
   constructor(private _db:StorageService, private plt:Platform, private router: Router,route:ActivatedRoute) {
-    route.params.subscribe(val => {
-      val.this.loadschedules();
-      console.log("init");
-    }); 
+  
     this.plt.ready().then(()=>{
     this.loadschedules();
   });
