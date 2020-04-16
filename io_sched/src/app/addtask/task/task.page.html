@@ -30,18 +30,6 @@
         </ion-item>
     
     
-<!--     
-        <ion-item>
-            <ion-label>Contact</ion-label>
-            <ionic-selectable 
-                [(ngModel)]="sch.contact"
-                [items]="cs"
-                itemTextField="cs.length"
-                (onChange)="portChange($event)">
-            </ionic-selectable>
-        </ion-item> -->
-
-
       <ion-item>
         <ion-label>Contact</ion-label>
 
@@ -55,12 +43,12 @@
 
       <ion-item>
           <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="DDDD MMM D" value=" "  [(ngModel)]="sch.date"></ion-datetime>
+          <ion-datetime displayFormat="DDDD MMM D" value=" " (ionChange)="Dateformat(sch.date)"  [(ngModel)]="sch.date"></ion-datetime>
         </ion-item>
 
       <ion-item>
           <ion-label>Time</ion-label>
-          <ion-datetime displayFormat="hh:mm A" placeholder="00:00 PM" value="hh:mm" [(ngModel)]="sch.date" begin="getDate()"></ion-datetime>
+          <ion-datetime displayFormat="hh:mm A" placeholder="00:00 PM" value="hh:mm" [(ngModel)]="TIME"  begin="getDate()" ></ion-datetime>
       </ion-item>
       <ion-item >
           <ion-label>Notify Me</ion-label>
